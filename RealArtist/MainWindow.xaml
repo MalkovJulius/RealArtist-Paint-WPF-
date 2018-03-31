@@ -5,8 +5,124 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RealArtist"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="RealArtist" Height="530" Width="800" Background="DarkGray" Visibility="Visible" Icon="pack://application:,,,/Properties/image/icon.png">    
+        <Grid Background="Gray" Margin="5" ShowGridLines="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" MaxWidth="50"></ColumnDefinition>
+                <ColumnDefinition Width="7*" MinWidth="300"></ColumnDefinition>
+                <ColumnDefinition Width="*" MaxWidth="50"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="50" MinHeight="30" MaxHeight="60"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Name="MainTools" Grid.Row="0" Grid.Column="0">
+                <Label>TOOLS</Label>
+                <Button Name="Pencil" Height="40" Width="40" Click="Pencil_Click">
+                    <Image Source="pack://application:,,,/Properties/image/pencil.png"/>
+                </Button>
+                <Button Name="PenEraser" Height="40" Width="40" Click="PenEraser_Click">
+                    <Image Source="pack://application:,,,/Properties/image/eraser.png" ></Image>
+                </Button>
+                <Button Name="Brush" Height="40" Width="40" Click="Brush_Click" ToolTip="МОЖНО РИСОВАТЬ КРУГИ И ОВАЛЫ">
+                    <Image Source="pack://application:,,,/Properties/image/brush.png"/>
+                </Button>
+                <TextBlock>
+                    <Label>H</Label>
+                    <TextBox Name="HeigthBrush" Width="20" Text="10"/>
+                </TextBlock>
+                <TextBlock>
+                <Label>W</Label>
+                    <TextBox Name="WidthBrush" Width="17" Text="3"></TextBox>
+                </TextBlock>
+                <Button Name="Pipetka" Height="40" Width="40" Click="Pipetka_Click">
+                    <Image Source="pack://application:,,,/Properties/image/pipetka.jpg" Height="40" Width="40"/>
+                </Button>
+                <Button Name="PaintOver" Height="40" Width="40" Click="PaintOver_Click">
+                    <Image Source="pack://application:,,,/Properties/image/paintOver.png"/>
+                </Button>
+                <Button Name="BSmall" Height="40" Width="40" Click="BSmall_Click">
+                    <Ellipse Fill="Black" Height="5" Width="5"></Ellipse>
+                </Button>
+                <Button Name="BMiddle" Height="40" Width="40" Click="BMiddle_Click">
+                    <Ellipse Fill="Black" Height="10" Width="10"></Ellipse>
+                </Button>
+                <Button Name="BBig" Height="40" Width="40" Click="BBig_Click">
+                    <Ellipse Fill="Black" Height="15" Width="15"></Ellipse>
+                </Button>
+                <Button Name="BClear" Content="CLEAR" Width="40" Click="BClear_Click"/>
+            </StackPanel>
+            <StackPanel Name="OtherTools" Grid.Row="0" Grid.Column="2">
+                <Label>Other Tools</Label>
+                <Button Name="BOpacityPaper" Height="40" Width="40" Click="BOpacityPaper_Click">
+                    <Image Source="pack://application:,,,/Properties/image/opacityP.png"/>
+                </Button>
+                <TextBox Name="CopacityValue" TextAlignment="Center">0,5</TextBox>
+                <Button Name="SizeOfAlbum" Margin="0,5,0,0" Height="20" ToolTip="Установить размер листа" Content="Size" Click="SizeOfAlbum_Click"/>
+                <Label>Height</Label>
+                <TextBox Name="HeightAlbum" Text="550"></TextBox>
+                <Label>Width</Label>
+                <TextBox Name="WidthAlbum" Text="800"></TextBox>
+                <Button Name="BRectangle" Margin="0,5,0,0" Height="20" Click="BRectangle_Click">
+                    <Rectangle Height="12" Width="30" Stroke="Black" StrokeThickness="3"></Rectangle>
+                </Button>
+                <Button Name="BCircle" Margin="0,5,0,0" Height="20" Click="BCircle_Click">
+                    <Ellipse Height="15" Width="15" Stroke="Black" StrokeThickness="2"></Ellipse>
+                </Button>
+                <Button Name="BEllipse" Height="20" Margin="0,5,0,0" Click="BEllipse_Click">
+                    <Ellipse Height="10" Width="30" Stroke="Black" StrokeThickness="3"></Ellipse>
+                </Button>
+                <Button Name="BLine" Margin="0,5,-0.255,0" Height="20" HorizontalAlignment="Right" Width="50" Click="BLine_Click">
+                    <Line X1="5" X2="35" Y1="5" Y2="9" Stroke="Black" StrokeThickness="3"></Line>
+                </Button>
+                <Button Name="BPolygon" Height="20" Margin="0,5,0,0" Click="BPolygon_Click">
+                    <Polygon Stroke="Black" StrokeThickness="2" Points="7,10 35,15 15,5" ></Polygon>
+                </Button>
+                <Button Name="PPath" Height="20" Margin="0,5,0,0">
+                    <Path Stroke="Black" StrokeThickness="2" Data="M 0,10 C 25,0 25,20 30,5"></Path>
+                </Button>
+                <TextBox Name="TempTextX"></TextBox>
+                <TextBox Name="TempTextY"></TextBox>
+        </StackPanel>
+            <StackPanel Name="BottonPanel" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal">
+                <Button Name="Palette" Margin="5" Height="40" Width="40">
+                    <Image Source="pack://application:,,,/Properties/image/palette.png"/>
+                </Button>
+                <Button Name="BBlack" Margin="10,0,0,0" Background="Black" Height="30" Width="30" Click="BBlack_Click"></Button>
+                <Button Name="BGray" Background="Gray" Height="30" Width="30" Click="BGray_Click"></Button>
+                <Button Name="BWhite" Background="White" Height="30" Width="30" Click="BWhite_Click"></Button>
+                <Button Name="BREd"  Background="Red" Height="30" Width="30" Click="BREd_Click"></Button>
+                <Button Name="BOrange" Background="Orange" Height="30" Width="30" Click="BOrange_Click"></Button>
+                <Button Name="BYellow" Background="Yellow" Height="30" Width="30" Click="BYellow_Click"></Button>
+                <Button Name="BLawnGreen" Background="LawnGreen" Height="30" Width="30" Click="BLawnGreen_Click"></Button>
+                <Button Name="BGreen" Background="Green" Height="30" Width="30" Click="BGreen_Click"></Button>
+                <Button Name="BAquamarine" Background="Aquamarine" Height="30" Width="30" Click="BAquamarine_Click"></Button>
+                <Button Name="BSkyBlue" Background="DeepSkyBlue" Height="30" Width="30" Click="BSkyBlue_Click"></Button>
+                <Button Name="BBlue" Background="Blue" Height="30" Width="30" Click="BBlue_Click"></Button>
+                <Button Name="BPurple" Background="Purple" Height="30" Width="30" Click="BPurple_Click"></Button>
+                <Button Name="BPink" Background="HotPink" Height="30" Width="30" Click="BPink_Click"></Button>
+                <Button Name ="SaveP" Margin="20,0,0,0" Height="40" Width="40" Click="SaveP_Click">
+                    <Image Source="pack://application:,,,/Properties/image/SaveP.png"/>
+                </Button>
+                <Button Name ="OpenP" Height="40" Width="40" Click="OpenP_Click">
+                    <Image Source="pack://application:,,,/Properties/image/OpenP.png"/>
+                </Button>
+                <Button Name ="SelectO" Height="40" Width="40" Click="SelectO_Click">
+                    <Image Source="pack://application:,,,/Properties/image/SelectO.png"/>
+                </Button>
+                <Button Name ="LeftP" Height="40" Width="40">
+                    <Image Source="pack://application:,,,/Properties/image/LeftP.png"/>
+                </Button>
+                <TextBox Height="40" MinWidth="40" Background="LightGray" TextAlignment="Center" FontSize="30">1</TextBox>
+                <Button Name ="RightP" Height="40" Width="40">
+                    <Image Source="pack://application:,,,/Properties/image/RightP.png"/>
+                </Button>
+
+            </StackPanel>
+            <InkCanvas Name="Album" Cursor="Pen" Height="350" Width="650" Grid.Row="0" Grid.Column="1" Background="White" MouseLeftButtonUp="Album_MouseLeftButtonUp" PreviewMouseLeftButtonDown="Album_PreviewMouseLeftButtonDown" PreviewMouseMove="Album_PreviewMouseMove">
+                <InkCanvas.DefaultDrawingAttributes>
+                    <DrawingAttributes Height="2" Width="2" Color="Black"/>
+                </InkCanvas.DefaultDrawingAttributes>
+            </InkCanvas>
+        </Grid>    
 </Window>

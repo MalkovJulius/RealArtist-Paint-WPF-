@@ -93,5 +93,24 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Properties\image\brush.png" />
+    <Resource Include="Properties\image\eraser.png" />
+    <Resource Include="Properties\image\LeftP.png" />
+    <Resource Include="Properties\image\OpenP.png" />
+    <Resource Include="Properties\image\paintOver.png" />
+    <Resource Include="Properties\image\palette.png" />
+    <Resource Include="Properties\image\pencil.png" />
+    <Resource Include="Properties\image\pipetka.jpg" />
+    <Resource Include="Properties\image\RightP.png" />
+    <Resource Include="Properties\image\SaveP.png" />
+    <Resource Include="Properties\image\SelectO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Properties\image\icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Properties\image\opacityP.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
