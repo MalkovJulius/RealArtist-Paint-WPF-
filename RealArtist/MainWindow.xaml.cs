@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -38,14 +39,15 @@ namespace RealArtist
         public double StrokeShape { get; set; } = 2;                 //толщина рисуемой фигуры
 
         public bool toggle { get; set; } = false;                    //включатель 
-       // public bool togglePolygon { get; set; } = false;             //включатель многоугольника
+        public bool togglePolygon { get; set; } = false;             //включатель многоугольника
+        public Point FirstPoint { get; set; }
         
         public void PenEraser_Click(object sender, RoutedEventArgs e)       //стирает нарисованное
         {
             Shape = "noShape";
             Album.DefaultDrawingAttributes.Height = 40;
             Album.DefaultDrawingAttributes.Width = 40;
-            Album.DefaultDrawingAttributes.Color = Colors.White;
+            Album.DefaultDrawingAttributes.Color = Colors.White;           
         }
 
         private void BGray_Click(object sender, RoutedEventArgs e)      //меняет цвет кисти
@@ -211,7 +213,7 @@ namespace RealArtist
             Shape = "Line";        
         }
     
-        private void Album_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)     //событие при отпускании кнопки мыши
+        private void Album_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)     //событие при отпускании кнопки мыши
         {
             toggle = false;
             //Album.UseCustomCursor = false;
@@ -219,12 +221,18 @@ namespace RealArtist
 
         private void Album_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            FirstCoordinateX = e.GetPosition(Album).X;                                 
+            FirstCoordinateX = e.GetPosition(Album).X;
             FirstCoordinateY = e.GetPosition(Album).Y;
             LastCoordinateX = e.GetPosition(Album).X;
             LastCoordinateY = e.GetPosition(Album).Y;
+
+            FirstPoint= new Point(e.GetPosition(Album).X, e.GetPosition(Album).Y);
             FormSelection();
-            toggle = true;            
+            toggle = true;
+            /*if (e.LeftButton == MouseButtonState.Pressed)
+            {
+
+            }*/            
         }
 
         private void Album_PreviewMouseMove(object sender, MouseEventArgs e)                //собыьтие при перемещении мыши 
@@ -259,7 +267,7 @@ namespace RealArtist
         {
             if (Shape != "noShape")
             {
-                Album.UseCustomCursor = true;
+                Album.UseCustomCursor = true;                
             }
             else
             {
@@ -285,11 +293,11 @@ namespace RealArtist
                     break;
                 case "Polygon":
                     Album.DefaultDrawingAttributes.Color = Colors.Transparent;
-                    /*if (togglePolygon == true)
+                    if (togglePolygon == true)
                     {
                         FinishPolygon(FirstCoordinateX, FirstCoordinateY);
                     }
-                    DrawPolygon();   */                 
+                    DrawPolygon();                  
                     break;
                 default:
                     break;
@@ -338,18 +346,20 @@ namespace RealArtist
 
         private void DrawPolygon()
         {
-            //togglePolygon = true;
+            togglePolygon = true;
             Polygon myPolygon = new Polygon
             {
                 Stroke = DrawC,
                 StrokeThickness = StrokeShape                
             };
-            Point point1 = new Point(FirstCoordinateX,FirstCoordinateY);         
+            /*Point point1 = new Point(FirstCoordinateX,FirstCoordinateY);         
             PointCollection myPointCollections = new PointCollection
             {
                 point1
             };
-            myPolygon.Points= myPointCollections;
+            myPolygon.Points= myPointCollections;*/
+            myPolygon.Points.Add(FirstPoint);
+            
             Album.Children.Add(myPolygon);
         }
 
@@ -359,13 +369,14 @@ namespace RealArtist
             Point point1 = new Point(X, Y);            
             Polygon newPolygon = (Polygon)Album.Children[Album.Children.Count - 1];            
             newPolygon.Points.Add(point1);
+            
             /*double tempX, tempY;
             tempX = newPolygon.Points[0].X;
             tempY = newPolygon.Points[0].Y;
-            if (((X>=(tempX-10.0))||(X<=(tempX+10.0)))& ((Y >= (tempY - 10.0)) || (Y <= (tempY + 10.0))))
+            if (((X>=(tempX-10.0))||(X<=(tempX+10.0)))&& ((Y >= (tempY - 10.0)) || (Y <= (tempY + 10.0))))
             {
                 togglePolygon = false;               
-            }         */    
+            }    */       
         }
 
         private void FinishShape(double X, double Y)
@@ -475,6 +486,13 @@ namespace RealArtist
 
         private void SaveP_Click(object sender, RoutedEventArgs e)
         {
+            /*string path = "MyPicture.bin";
+            if (File.Exists("MyPicture.bin"))
+            {
+                path.IndexOf('.');
+            }*/
+            SaveFileDialog save = new SaveFileDialog();
+            save.ShowDialog();
             using (FileStream fs = new FileStream("MyPicture.bin", FileMode.Create))
             {
                 Album.Strokes.Save(fs);                
@@ -483,6 +501,9 @@ namespace RealArtist
 
         private void OpenP_Click(object sender, RoutedEventArgs e)
         {
+            OpenFileDialog open = new OpenFileDialog();
+            open.ShowDialog();
+
             using (FileStream fs = new FileStream("MyPicture.bin", FileMode.Open, FileAccess.Read))
             {
                 StrokeCollection sc = new StrokeCollection(fs);
@@ -493,6 +514,17 @@ namespace RealArtist
         private void SelectO_Click(object sender, RoutedEventArgs e)
         {
             Album.EditingMode = InkCanvasEditingMode.Select;
+        }
+
+        private void RightP_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void Album_MouseRightButtonDown(object sender, MouseButtonEventArgs e)      //отмена последнего рисования
+        {
+            
+
         }
     }
 

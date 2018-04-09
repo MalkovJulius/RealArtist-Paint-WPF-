@@ -114,12 +114,12 @@
                     <Image Source="pack://application:,,,/Properties/image/LeftP.png"/>
                 </Button>
                 <TextBox Height="40" MinWidth="40" Background="LightGray" TextAlignment="Center" FontSize="30">1</TextBox>
-                <Button Name ="RightP" Height="40" Width="40">
+                <Button Name ="RightP" Height="40" Width="40" Click="RightP_Click">
                     <Image Source="pack://application:,,,/Properties/image/RightP.png"/>
                 </Button>
 
             </StackPanel>
-            <InkCanvas Name="Album" Cursor="Pen" Height="350" Width="650" Grid.Row="0" Grid.Column="1" Background="White" MouseLeftButtonUp="Album_MouseLeftButtonUp" PreviewMouseLeftButtonDown="Album_PreviewMouseLeftButtonDown" PreviewMouseMove="Album_PreviewMouseMove">
+            <InkCanvas Name="Album" Cursor="Pen" Height="350" Width="650" Grid.Row="0" Grid.Column="1" Background="White" MouseLeftButtonUp="Album_PreviewMouseLeftButtonUp" PreviewMouseLeftButtonDown="Album_PreviewMouseLeftButtonDown" PreviewMouseMove="Album_PreviewMouseMove" MouseRightButtonDown="Album_MouseRightButtonDown">
                 <InkCanvas.DefaultDrawingAttributes>
                     <DrawingAttributes Height="2" Width="2" Color="Black"/>
                 </InkCanvas.DefaultDrawingAttributes>
