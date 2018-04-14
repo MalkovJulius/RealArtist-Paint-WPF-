@@ -119,10 +119,10 @@
                 </Button>
 
             </StackPanel>
-            <InkCanvas Name="Album" Cursor="Pen" Height="350" Width="650" Grid.Row="0" Grid.Column="1" Background="White" MouseLeftButtonUp="Album_PreviewMouseLeftButtonUp" PreviewMouseLeftButtonDown="Album_PreviewMouseLeftButtonDown" PreviewMouseMove="Album_PreviewMouseMove" MouseRightButtonDown="Album_MouseRightButtonDown">
+            <InkCanvas Name="Album" Cursor="Pen" Height="350" Width="650" Grid.Row="0" Grid.Column="1" Background="White" MouseLeftButtonUp="Album_PreviewMouseLeftButtonUp" PreviewMouseLeftButtonDown="Album_PreviewMouseLeftButtonDown" PreviewMouseMove="Album_PreviewMouseMove">
                 <InkCanvas.DefaultDrawingAttributes>
                     <DrawingAttributes Height="2" Width="2" Color="Black"/>
                 </InkCanvas.DefaultDrawingAttributes>
-            </InkCanvas>
+            </InkCanvas>        
         </Grid>    
 </Window>

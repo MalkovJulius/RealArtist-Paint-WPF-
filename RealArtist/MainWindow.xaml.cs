@@ -41,6 +41,7 @@ namespace RealArtist
         public bool toggle { get; set; } = false;                    //включатель 
         public bool togglePolygon { get; set; } = false;             //включатель многоугольника
         public Point FirstPoint { get; set; }
+        public PointCollection PointC { get; set; }
         
         public void PenEraser_Click(object sender, RoutedEventArgs e)       //стирает нарисованное
         {
@@ -267,36 +268,33 @@ namespace RealArtist
         {
             if (Shape != "noShape")
             {
-                Album.UseCustomCursor = true;                
+                Album.UseCustomCursor = true;
+                Album.DefaultDrawingAttributes.Color = Colors.Transparent;
             }
             else
             {
                 Album.UseCustomCursor = false;
+                Album.DefaultDrawingAttributes.Color = DrawBrushC;
             }
             switch (Shape)
             {
-                case "Line":
-                    Album.DefaultDrawingAttributes.Color = Colors.Transparent;
+                case "Line":                    
                     DrawLine();
                     break;
-                case "Rectangle":
-                    Album.DefaultDrawingAttributes.Color = Colors.Transparent;
+                case "Rectangle":                    
                     DrawRectangle();
                     break;
-                case "Ellipse":
-                    Album.DefaultDrawingAttributes.Color = Colors.Transparent;
+                case "Ellipse":                    
                     DrawEllipse();
                     break;
-                case "Circle":
-                    Album.DefaultDrawingAttributes.Color = Colors.Transparent;
+                case "Circle":                   
                     DrawEllipse();
                     break;
-                case "Polygon":
-                    Album.DefaultDrawingAttributes.Color = Colors.Transparent;
-                    if (togglePolygon == true)
+                case "Polygon":                    
+                    if (togglePolygon)
                     {
-                        FinishPolygon(FirstCoordinateX, FirstCoordinateY);
-                    }
+                        FinishPolygon();
+                    } else
                     DrawPolygon();                  
                     break;
                 default:
@@ -347,36 +345,31 @@ namespace RealArtist
         private void DrawPolygon()
         {
             togglePolygon = true;
+            PointC = new PointCollection
+            {
+                FirstPoint
+            };
             Polygon myPolygon = new Polygon
             {
                 Stroke = DrawC,
-                StrokeThickness = StrokeShape                
+                StrokeThickness = StrokeShape
             };
-            /*Point point1 = new Point(FirstCoordinateX,FirstCoordinateY);         
-            PointCollection myPointCollections = new PointCollection
-            {
-                point1
-            };
-            myPolygon.Points= myPointCollections;*/
-            myPolygon.Points.Add(FirstPoint);
-            
-            Album.Children.Add(myPolygon);
+            myPolygon.Points = PointC;
+            Album.Children.Add(myPolygon);            
         }
 
 
-        private void FinishPolygon(double X, double Y)
-        {
-            Point point1 = new Point(X, Y);            
-            Polygon newPolygon = (Polygon)Album.Children[Album.Children.Count - 1];            
-            newPolygon.Points.Add(point1);
-            
-            /*double tempX, tempY;
-            tempX = newPolygon.Points[0].X;
-            tempY = newPolygon.Points[0].Y;
-            if (((X>=(tempX-10.0))||(X<=(tempX+10.0)))&& ((Y >= (tempY - 10.0)) || (Y <= (tempY + 10.0))))
+        private void FinishPolygon()
+        {         
+            PointC.Add(FirstPoint);            
+            Polygon newPolygon = new Polygon()           
             {
-                togglePolygon = false;               
-            }    */       
+                Stroke = DrawC,
+                StrokeThickness = StrokeShape
+            };
+            newPolygon.Points = PointC;  
+            Album.Children.RemoveAt(Album.Children.Count-1);
+            Album.Children.Add(newPolygon);         
         }
 
         private void FinishShape(double X, double Y)
@@ -445,7 +438,7 @@ namespace RealArtist
             Shape = "noShape";
             Album.DefaultDrawingAttributes.Color = DrawBrushC;
             Album.DefaultDrawingAttributes.Height = 2;
-            Album.DefaultDrawingAttributes.Width = 2;           
+            Album.DefaultDrawingAttributes.Width = 2;            
         }
 
         private void Pipetka_Click(object sender, RoutedEventArgs e)            //выбор пипетки
@@ -519,13 +512,7 @@ namespace RealArtist
         private void RightP_Click(object sender, RoutedEventArgs e)
         {
             
-        }
-
-        private void Album_MouseRightButtonDown(object sender, MouseButtonEventArgs e)      //отмена последнего рисования
-        {
-            
-
-        }
+        }             
     }
 
 }
