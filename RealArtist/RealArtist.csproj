@@ -112,5 +112,12 @@
   <ItemGroup>
     <Resource Include="Properties\image\opacityP.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Properties\image\back.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Properties\image\RGB_Colorcube_Corner_Black.png" />
+    <Resource Include="Properties\image\RGB_Colorcube_Corner_White.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
